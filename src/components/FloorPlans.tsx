@@ -10,7 +10,7 @@ const FloorPlans = () => {
       {
         id: 'g1',
         name: 'Apartment A',
-        size: '60m²',
+        size: '88m²',
         bedrooms: 2,
         bathrooms: 2,
         price: '51,500frw/night',
@@ -20,7 +20,7 @@ const FloorPlans = () => {
       {
         id: 'g2',
         name: 'Apartment B',
-        size: '60m²',
+        size: '88m²',
         bedrooms: 2,
         bathrooms: 2,
         price: '51,500frw/night',
@@ -30,7 +30,7 @@ const FloorPlans = () => {
       {
         id: 'g3',
         name: 'Apartment C',
-        size: '60m²',
+        size: '88m²',
         bedrooms: 2,
         bathrooms: 2,
         price: '51,500frw/night',
@@ -40,7 +40,7 @@ const FloorPlans = () => {
       {
         id: 'g4',
         name: 'Apartment D',
-        size: '60m²',
+        size: '88m²',
         bedrooms: 2,
         bathrooms: 2,
         price: '51,500frw/night',
@@ -52,7 +52,7 @@ const FloorPlans = () => {
       {
         id: 'f1',
         name: 'Apartment A',
-        size: '60m²',
+        size: '88m²',
         bedrooms: 2,
         bathrooms: 2,
         price: '51,500frw/night',
@@ -62,7 +62,7 @@ const FloorPlans = () => {
       {
         id: 'f2',
         name: 'Apartment B',
-        size: '60m²',
+        size: '88m²',
         bedrooms: 2,
         bathrooms: 2,
         price: '51,500frw/night',
@@ -72,7 +72,7 @@ const FloorPlans = () => {
       {
         id: 'f3',
         name: 'Apartment C',
-        size: '60m²',
+        size: '88m²',
         bedrooms: 2,
         bathrooms: 2,
         price: '51,500frw/night',
@@ -82,7 +82,7 @@ const FloorPlans = () => {
       {
         id: 'f4',
         name: 'Apartment D',
-        size: '60m²',
+        size: '88m²',
         bedrooms: 2,
         bathrooms: 2,
         price: '51,500frw/night',
