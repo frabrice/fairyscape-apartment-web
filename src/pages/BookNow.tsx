@@ -29,7 +29,7 @@ const BookNow = () => {
       content: {
         phone: '+250 788 351 957',
         email: 'fairyscape250@gmail.com',
-        address: '10, KK 556 St, Kicukiro District, Rwanda'
+        address: '10, KK 535 St, Kicukiro District, Rwanda'
       }
     },
     {
