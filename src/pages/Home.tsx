@@ -8,6 +8,7 @@ import Footer from '../components/Footer';
 import Lifestyle from '../components/Lifestyle';
 import Stats from '../components/Stats';
 import WhyChooseUs from '../components/WhyChooseUs';
+import Testimonials from '../components/Testimonials';
 
 function Home() {
   return (
@@ -18,6 +19,7 @@ function Home() {
       <Lifestyle />
       <FloorPlans />
       <WhyChooseUs />
+      <Testimonials />
       <Gallery />
       <Contact />
       <Footer />

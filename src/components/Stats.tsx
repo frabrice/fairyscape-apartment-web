@@ -1,40 +1,36 @@
 import React from 'react';
 import { Users, Building2, Shield } from 'lucide-react';
 
-const Stats = () => {
-  const stats = [
-    {
-      icon: <Users className="w-5 h-5 text-[#B8860B]" />,
-      value: '50+',
-      label: 'Happy Residents',
-    },
-    {
-      icon: <Building2 className="w-5 h-5 text-[#B8860B]" />,
-      value: '8',
-      label: 'Luxury Units',
-    },
-    {
-      icon: <Shield className="w-5 h-5 text-[#B8860B]" />,
-      value: '24/7',
-      label: 'Security',
-    },
-  ];
+const stats = [
+  { icon: Users, value: '50+', label: 'Happy Residents' },
+  { icon: Building2, value: '8', label: 'Luxury Units' },
+  { icon: Shield, value: '24/7', label: 'Security' },
+];
 
+const Stats = () => {
   return (
-    <div className="relative -mt-20 z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-3 bg-white rounded-xl shadow-xl py-3 px-4">
-        {stats.map((stat, index) => (
-          <div
-            key={index}
-            className="text-center transform hover:scale-105 transition-transform duration-300"
-          >
-            <div className="flex justify-center mb-1">{stat.icon}</div>
-            <div className="text-xl font-cormorant font-medium text-gray-900 leading-none">
-              {stat.value}
+    <div className="relative z-10 max-w-5xl mx-auto px-6 -mt-8">
+      <div className="grid grid-cols-3 bg-white shadow-[0_8px_48px_rgba(0,0,0,0.12)] border border-[rgba(184,134,11,0.1)]">
+        {stats.map((stat, index) => {
+          const Icon = stat.icon;
+          return (
+            <div
+              key={index}
+              className={`flex flex-col items-center justify-center py-6 px-4 group hover:bg-[rgba(184,134,11,0.04)] transition-colors duration-300 ${
+                index < stats.length - 1 ? 'border-r border-[rgba(184,134,11,0.15)]' : ''
+              }`}
+            >
+              <Icon
+                size={18}
+                className="text-[#B8860B] mb-2 transition-transform duration-300 group-hover:scale-110"
+              />
+              <div className="font-cormorant text-3xl font-light text-gray-900 leading-none mb-1">
+                {stat.value}
+              </div>
+              <div className="section-label text-gray-400 text-[0.6rem]">{stat.label}</div>
             </div>
-            <div className="text-[10px] text-gray-600 leading-tight">{stat.label}</div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

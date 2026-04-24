@@ -1,189 +1,210 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BedDouble, Bath, Maximize, Wifi, Tv, Car, Trees as Tree } from 'lucide-react';
+import { BedDouble, Bath, Maximize, Wifi, Car, Trees as Tree, Dumbbell } from 'lucide-react';
+
+type FloorKey = 'ground' | 'first';
+
+interface Apartment {
+  id: string;
+  name: string;
+  size: string;
+  bedrooms: number;
+  bathrooms: number;
+  price: string;
+  features: string[];
+  image: string;
+}
+
+const apartments: Record<FloorKey, Apartment[]> = {
+  ground: [
+    {
+      id: 'g1',
+      name: 'Apartment A',
+      size: '88m²',
+      bedrooms: 2,
+      bathrooms: 2,
+      price: '51,500 FRW',
+      features: ['Rooftop Garden', 'Free Wi-Fi', 'Equipped Gym', 'Parking Space'],
+      image: 'https://raw.githubusercontent.com/frabrice/EricApt/refs/heads/main/Aprt%20Suit%201.JPG',
+    },
+    {
+      id: 'g2',
+      name: 'Apartment B',
+      size: '88m²',
+      bedrooms: 2,
+      bathrooms: 2,
+      price: '51,500 FRW',
+      features: ['Rooftop Garden', 'Free Wi-Fi', 'Equipped Gym', 'Parking Space'],
+      image: 'https://raw.githubusercontent.com/frabrice/EricApt/refs/heads/main/Aprt%20Suit%202.JPG',
+    },
+    {
+      id: 'g3',
+      name: 'Apartment C',
+      size: '88m²',
+      bedrooms: 2,
+      bathrooms: 2,
+      price: '51,500 FRW',
+      features: ['Rooftop Garden', 'Free Wi-Fi', 'Equipped Gym', 'Parking Space'],
+      image: 'https://raw.githubusercontent.com/frabrice/EricApt/refs/heads/main/Aprt%20Suit%203.JPG',
+    },
+    {
+      id: 'g4',
+      name: 'Apartment D',
+      size: '88m²',
+      bedrooms: 2,
+      bathrooms: 2,
+      price: '51,500 FRW',
+      features: ['Rooftop Garden', 'Free Wi-Fi', 'Equipped Gym', 'Parking Space'],
+      image: 'https://raw.githubusercontent.com/frabrice/EricApt/refs/heads/main/Apt%20Suit%204.JPG',
+    },
+  ],
+  first: [
+    {
+      id: 'f1',
+      name: 'Apartment A',
+      size: '88m²',
+      bedrooms: 2,
+      bathrooms: 2,
+      price: '51,500 FRW',
+      features: ['Rooftop Garden', 'Free Wi-Fi', 'Equipped Gym', 'Parking Space'],
+      image: 'https://raw.githubusercontent.com/frabrice/EricApt/refs/heads/main/Aprt%20Suit%202.JPG',
+    },
+    {
+      id: 'f2',
+      name: 'Apartment B',
+      size: '88m²',
+      bedrooms: 2,
+      bathrooms: 2,
+      price: '51,500 FRW',
+      features: ['Rooftop Garden', 'Free Wi-Fi', 'Equipped Gym', 'Parking Space'],
+      image: 'https://raw.githubusercontent.com/frabrice/EricApt/refs/heads/main/Aprt%20Suit%203.JPG',
+    },
+    {
+      id: 'f3',
+      name: 'Apartment C',
+      size: '88m²',
+      bedrooms: 2,
+      bathrooms: 2,
+      price: '51,500 FRW',
+      features: ['Rooftop Garden', 'Free Wi-Fi', 'Equipped Gym', 'Parking Space'],
+      image: 'https://raw.githubusercontent.com/frabrice/EricApt/refs/heads/main/Apt%20Suit%204.JPG',
+    },
+    {
+      id: 'f4',
+      name: 'Apartment D',
+      size: '88m²',
+      bedrooms: 2,
+      bathrooms: 2,
+      price: '51,500 FRW',
+      features: ['Rooftop Garden', 'Free Wi-Fi', 'Equipped Gym', 'Parking Space'],
+      image: 'https://raw.githubusercontent.com/frabrice/EricApt/refs/heads/main/Aprt%20Suit%201.JPG',
+    },
+  ],
+};
+
+const featureIcons: Record<string, React.ReactNode> = {
+  'Rooftop Garden': <Tree size={13} />,
+  'Free Wi-Fi': <Wifi size={13} />,
+  'Equipped Gym': <Dumbbell size={13} />,
+  'Parking Space': <Car size={13} />,
+};
 
 const FloorPlans = () => {
-  const [activeFloor, setActiveFloor] = useState('ground');
-
-  const apartments = {
-    ground: [
-      {
-        id: 'g1',
-        name: 'Apartment A',
-        size: '88m²',
-        bedrooms: 2,
-        bathrooms: 2,
-        price: '51,500frw/night',
-        features: ['Rooftop Garden', 'Free Wi-Fi', 'Equipped Gym', 'Parking Space'],
-        image: 'https://raw.githubusercontent.com/frabrice/EricApt/refs/heads/main/Aprt%20Suit%201.JPG',
-      },
-      {
-        id: 'g2',
-        name: 'Apartment B',
-        size: '88m²',
-        bedrooms: 2,
-        bathrooms: 2,
-        price: '51,500frw/night',
-        features: ['Rooftop Garden', 'Free Wi-Fi', 'Equipped Gym', 'Parking Space'],
-        image: 'https://raw.githubusercontent.com/frabrice/EricApt/refs/heads/main/Aprt%20Suit%202.JPG',
-      },
-      {
-        id: 'g3',
-        name: 'Apartment C',
-        size: '88m²',
-        bedrooms: 2,
-        bathrooms: 2,
-        price: '51,500frw/night',
-        features: ['Rooftop Garden', 'Free Wi-Fi', 'Equipped Gym', 'Parking Space'],
-        image: 'https://raw.githubusercontent.com/frabrice/EricApt/refs/heads/main/Aprt%20Suit%203.JPG',
-      },
-      {
-        id: 'g4',
-        name: 'Apartment D',
-        size: '88m²',
-        bedrooms: 2,
-        bathrooms: 2,
-        price: '51,500frw/night',
-        features: ['Rooftop Garden', 'Free Wi-Fi', 'Equipped Gym', 'Parking Space'],
-        image: 'https://raw.githubusercontent.com/frabrice/EricApt/refs/heads/main/Apt%20Suit%204.JPG',
-      },
-    ],
-    first: [
-      {
-        id: 'f1',
-        name: 'Apartment A',
-        size: '88m²',
-        bedrooms: 2,
-        bathrooms: 2,
-        price: '51,500frw/night',
-        features: ['Rooftop Garden', 'Free Wi-Fi', 'Equipped Gym', 'Parking Space'],
-        image: 'https://raw.githubusercontent.com/frabrice/EricApt/refs/heads/main/Aprt%20Suit%202.JPG',
-      },
-      {
-        id: 'f2',
-        name: 'Apartment B',
-        size: '88m²',
-        bedrooms: 2,
-        bathrooms: 2,
-        price: '51,500frw/night',
-        features: ['Rooftop Garden', 'Free Wi-Fi', 'Equipped Gym', 'Parking Space'],
-        image: 'https://raw.githubusercontent.com/frabrice/EricApt/refs/heads/main/Aprt%20Suit%203.JPG',
-      },
-      {
-        id: 'f3',
-        name: 'Apartment C',
-        size: '88m²',
-        bedrooms: 2,
-        bathrooms: 2,
-        price: '51,500frw/night',
-        features: ['Rooftop Garden', 'Free Wi-Fi', 'Equipped Gym', 'Parking Space'],
-        image: 'https://raw.githubusercontent.com/frabrice/EricApt/refs/heads/main/Apt%20Suit%204.JPG',
-      },
-      {
-        id: 'f4',
-        name: 'Apartment D',
-        size: '88m²',
-        bedrooms: 2,
-        bathrooms: 2,
-        price: '51,500frw/night',
-        features: ['Rooftop Garden', 'Free Wi-Fi', 'Equipped Gym', 'Parking Space'],
-        image: 'https://raw.githubusercontent.com/frabrice/EricApt/refs/heads/main/Aprt%20Suit%201.JPG',
-      },
-    ],
-  };
-
-  const amenityIcons = {
-    'Rooftop Garden': <Tree className="w-5 h-5" />,
-    'Free Wi-Fi': <Wifi className="w-5 h-5" />,
-    'Equipped Gym': <Tv className="w-5 h-5" />,
-    'Parking Space': <Car className="w-5 h-5" />,
-  };
+  const [activeFloor, setActiveFloor] = useState<FloorKey>('ground');
 
   return (
-    <section id="floor-plans" className="py-16 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-cormorant font-medium text-gray-900 mb-4">
-            Available Floor Plans
-          </h2>
-          <div className="w-20 h-0.5 bg-[#B8860B] mx-auto mb-4" />
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Discover your perfect living space with our thoughtfully designed floor plans
-          </p>
+    <section id="floor-plans" className="py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
+          <div>
+            <p className="section-label mb-4">Floor Plans</p>
+            <h2
+              className="font-cormorant font-light text-gray-900 leading-tight"
+              style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}
+            >
+              Find your
+              <br />
+              <em className="italic">perfect space</em>
+            </h2>
+          </div>
+
+          {/* Floor tabs */}
+          <div className="flex border border-[rgba(184,134,11,0.25)]">
+            {(['ground', 'first'] as FloorKey[]).map((floor) => (
+              <button
+                key={floor}
+                onClick={() => setActiveFloor(floor)}
+                className={`px-6 py-2.5 font-jost text-[0.72rem] tracking-[0.12em] uppercase transition-all duration-300 ${
+                  activeFloor === floor
+                    ? 'bg-[#B8860B] text-white'
+                    : 'text-gray-500 hover:text-[#B8860B] bg-white'
+                }`}
+              >
+                {floor === 'ground' ? 'Ground Floor' : '1st Floor'}
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* Floor Selection */}
-        <div className="flex justify-center gap-4 mb-8">
-          {['ground', 'first'].map((floor) => (
-            <button
-              key={floor}
-              onClick={() => setActiveFloor(floor)}
-              className={`
-                px-6 py-2 rounded-lg text-sm transition-all duration-300
-                ${activeFloor === floor
-                  ? 'bg-[#B8860B] text-white shadow-md'
-                  : 'bg-white text-gray-600 hover:bg-gray-100'}
-              `}
-            >
-              {floor === 'ground' ? 'Ground Floor' : '1st Floor'}
-            </button>
-          ))}
-        </div>
-
-        {/* Floor Plan Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {apartments[activeFloor].map((apartment) => (
-            <div
-              key={apartment.id}
-              className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
-            >
-              <div className="relative h-40">
+        {/* Cards grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {apartments[activeFloor].map((apt, idx) => (
+            <div key={apt.id} className="luxury-card group overflow-hidden flex flex-col">
+              {/* Image */}
+              <div className="relative h-44 overflow-hidden">
                 <img
-                  src={apartment.image}
-                  alt={apartment.name}
-                  className="w-full h-full object-cover"
+                  src={apt.image}
+                  alt={apt.name}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
+                {/* Price badge */}
+                <div className="absolute bottom-3 left-3 bg-[#B8860B] text-white px-3 py-1">
+                  <span className="font-jost text-[0.7rem] tracking-wide">{apt.price}<span className="opacity-70">/night</span></span>
+                </div>
               </div>
 
-              <div className="p-4">
-                <div className="mb-2">
-                  <h3 className="text-sm font-medium text-gray-900">{apartment.name}</h3>
-                  <p className="text-[#B8860B] font-medium text-sm">{apartment.price}</p>
+              {/* Details */}
+              <div className="p-5 flex flex-col flex-1">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-cormorant text-lg font-medium text-gray-900">{apt.name}</h3>
+                  <span className="font-jost text-[0.65rem] tracking-widest uppercase text-gray-400">
+                    {String(idx + 1).padStart(2, '0')}
+                  </span>
                 </div>
 
-                <div className="grid grid-cols-3 gap-2 mb-3 text-xs text-gray-600">
-                  <div className="flex items-center gap-1">
-                    <Maximize className="w-3.5 h-3.5" />
-                    <span>{apartment.size}</span>
+                {/* Specs */}
+                <div className="flex gap-4 mb-4 pb-4 border-b border-[rgba(184,134,11,0.1)]">
+                  <div className="flex items-center gap-1.5 text-gray-500">
+                    <Maximize size={13} className="text-[#B8860B]" />
+                    <span className="font-jost text-xs">{apt.size}</span>
                   </div>
-                  <div className="flex items-center gap-1">
-                    <BedDouble className="w-3.5 h-3.5" />
-                    <span>{apartment.bedrooms}</span>
+                  <div className="flex items-center gap-1.5 text-gray-500">
+                    <BedDouble size={13} className="text-[#B8860B]" />
+                    <span className="font-jost text-xs">{apt.bedrooms} Bed</span>
                   </div>
-                  <div className="flex items-center gap-1">
-                    <Bath className="w-3.5 h-3.5" />
-                    <span>{apartment.bathrooms}</span>
-                  </div>
-                </div>
-
-                <div className="border-t pt-3">
-                  <div className="grid grid-cols-2 gap-1.5">
-                    {apartment.features.map((feature, idx) => (
-                      <div
-                        key={idx}
-                        className="flex items-center gap-1 text-[10px] text-gray-600"
-                      >
-                        {amenityIcons[feature] || <div className="w-3.5 h-3.5" />}
-                        <span>{feature}</span>
-                      </div>
-                    ))}
+                  <div className="flex items-center gap-1.5 text-gray-500">
+                    <Bath size={13} className="text-[#B8860B]" />
+                    <span className="font-jost text-xs">{apt.bathrooms} Bath</span>
                   </div>
                 </div>
 
-                <Link 
-                  to="/book-tour#top"
+                {/* Features */}
+                <div className="grid grid-cols-2 gap-y-2 mb-5">
+                  {apt.features.map((f) => (
+                    <div key={f} className="flex items-center gap-1.5 text-gray-400">
+                      <span className="text-[#B8860B]">{featureIcons[f]}</span>
+                      <span className="font-jost text-[0.68rem]">{f}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* CTA */}
+                <Link
+                  to="/book-tour"
                   onClick={() => window.scrollTo(0, 0)}
-                  className="block w-full mt-3 bg-[#B8860B] hover:bg-[#8B6508] text-white py-1.5 rounded text-xs transition-colors duration-300 text-center"
+                  className="mt-auto btn-gold text-center block"
                 >
                   Schedule Viewing
                 </Link>

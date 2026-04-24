@@ -1,110 +1,122 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Home, LayoutGrid, Image, Phone } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Close menu on route change
+  useEffect(() => { setIsOpen(false); }, [location.pathname]);
+
   const navItems = [
-    { name: 'Home', icon: <Home size={16} />, path: '/' },
-    { name: 'Floor Plans', icon: <LayoutGrid size={16} />, path: '/floor-plans' },
-    { name: 'Gallery', icon: <Image size={16} />, path: '/gallery' },
-    { name: 'Contact', icon: <Phone size={16} />, path: '/contact' },
+    { name: 'Home', path: '/' },
+    { name: 'Floor Plans', path: '/floor-plans' },
+    { name: 'Gallery', path: '/gallery' },
+    { name: 'Contact', path: '/contact' },
   ];
 
   return (
-    <nav className="fixed w-full bg-white/95 backdrop-blur-sm z-50 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex-shrink-0">
-            <Link 
-              to="/" 
-              className="text-[#B8860B] text-2xl font-cormorant hover:text-[#8B6508] transition-colors duration-300 tracking-wide"
-            >
-              Fairyscape
-            </Link>
-          </div>
-          
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex md:items-center">
-            <div className="flex items-center space-x-6">
-              {navItems.map((item) => {
-                const isActive = location.pathname === item.path;
-                return (
-                  <Link
-                    key={item.name}
-                    to={item.path}
-                    className={`
-                      group flex items-center gap-1.5 px-2 py-1.5 text-sm font-light tracking-wide
-                      transition-all duration-300 relative
-                      ${isActive ? 'text-[#B8860B]' : 'text-gray-600 hover:text-gray-900'}
-                    `}
-                  >
-                    <span className={`transition-transform duration-300 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`}>
-                      {item.icon}
-                    </span>
-                    <span>{item.name}</span>
-                    {isActive && (
-                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#B8860B] transform origin-left transition-transform duration-300" />
-                    )}
-                  </Link>
-                );
-              })}
-              <Link
-                to="/book-now"
-                className="ml-6 bg-[#B8860B] hover:bg-[#8B6508] text-white px-6 py-2 rounded-lg text-sm transition-colors duration-300 shadow-sm hover:shadow-md"
-              >
-                Book Now
-              </Link>
-            </div>
-          </div>
+    <nav
+      className={`fixed w-full z-50 transition-all duration-500 ${
+        scrolled
+          ? 'bg-white/98 backdrop-blur-md shadow-[0_1px_0_rgba(184,134,11,0.15)]'
+          : 'bg-transparent'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <div className="flex items-center justify-between h-[72px]">
 
-          {/* Mobile Navigation Button */}
-          <div className="md:hidden flex items-center">
-            <Link
-              to="/book-now"
-              className="bg-[#B8860B] hover:bg-[#8B6508] text-white px-4 py-1.5 rounded-lg text-sm transition-colors duration-300 shadow-sm hover:shadow-md mr-4"
-            >
-              Book Now
-            </Link>
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-600 hover:text-gray-900 transition-colors duration-300"
-            >
-              {isOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
-          </div>
-        </div>
-      </div>
+          {/* Logo */}
+          <Link
+            to="/"
+            className="font-cormorant text-2xl tracking-[0.08em] transition-colors duration-300"
+            style={{ color: scrolled ? 'var(--gold)' : 'white' }}
+          >
+            Fairyscape
+          </Link>
 
-      {/* Mobile Navigation Menu */}
-      {isOpen && (
-        <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/95 backdrop-blur-sm">
+          {/* Desktop nav */}
+          <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => {
               const isActive = location.pathname === item.path;
               return (
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`
-                    flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-light tracking-wide
-                    transition-all duration-300
-                    ${isActive ? 'text-[#B8860B] bg-[#B8860B]/5' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}
-                  `}
-                  onClick={() => setIsOpen(false)}
+                  className={`relative font-jost text-[0.78rem] tracking-[0.14em] uppercase font-light transition-colors duration-300 pb-0.5 ${
+                    isActive
+                      ? scrolled ? 'text-[#B8860B]' : 'text-[#D4A017]'
+                      : scrolled ? 'text-gray-700 hover:text-[#B8860B]' : 'text-white/85 hover:text-white'
+                  }`}
                 >
-                  <span className={`transition-transform duration-300 ${isActive ? 'scale-110' : ''}`}>
-                    {item.icon}
-                  </span>
                   {item.name}
+                  <span
+                    className={`absolute -bottom-0.5 left-0 h-px bg-[#B8860B] transition-all duration-300 ${
+                      isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                    }`}
+                  />
                 </Link>
               );
             })}
+            <Link
+              to="/book-now"
+              className="btn-gold rounded-none ml-4 inline-block"
+            >
+              Book Now
+            </Link>
+          </div>
+
+          {/* Mobile */}
+          <div className="md:hidden flex items-center gap-4">
+            <Link
+              to="/book-now"
+              className="btn-gold rounded-none text-[0.7rem] px-4 py-2"
+            >
+              Book Now
+            </Link>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className={`transition-colors duration-300 ${scrolled ? 'text-gray-700' : 'text-white'}`}
+              aria-label="Toggle menu"
+            >
+              {isOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
           </div>
         </div>
-      )}
+      </div>
+
+      {/* Mobile dropdown */}
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-400 ${
+          isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        <div className="bg-white border-t border-[rgba(184,134,11,0.12)] px-6 py-4 space-y-1">
+          {navItems.map((item) => {
+            const isActive = location.pathname === item.path;
+            return (
+              <Link
+                key={item.name}
+                to={item.path}
+                onClick={() => setIsOpen(false)}
+                className={`block py-2.5 font-jost text-[0.78rem] tracking-[0.14em] uppercase font-light border-b border-gray-50 transition-colors duration-200 ${
+                  isActive ? 'text-[#B8860B]' : 'text-gray-600 hover:text-[#B8860B]'
+                }`}
+              >
+                {item.name}
+              </Link>
+            );
+          })}
+        </div>
+      </div>
     </nav>
   );
 };
