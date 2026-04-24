@@ -6,7 +6,6 @@ import Gallery from '../components/Gallery';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import Lifestyle from '../components/Lifestyle';
-import Stats from '../components/Stats';
 import WhyChooseUs from '../components/WhyChooseUs';
 import Testimonials from '../components/Testimonials';
 
@@ -15,7 +14,6 @@ function Home() {
     <div className="bg-white min-h-screen">
       <Navbar />
       <Hero />
-      <Stats />
       <Lifestyle />
       <FloorPlans />
       <WhyChooseUs />

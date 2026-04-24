@@ -10,20 +10,18 @@ const BookNow = () => {
       <Navbar />
 
       {/* Hero */}
-      <div className="relative pt-[72px]">
-        <div className="h-[40vh] min-h-[240px] relative overflow-hidden">
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: 'url("https://raw.githubusercontent.com/frabrice/EricApt/refs/heads/main/Apartments_1.JPG")' }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/40 to-black/65" />
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#B8860B] to-transparent opacity-50" />
-          <div className="relative h-full flex flex-col items-center justify-center text-center px-6">
-            <p className="section-label text-[#D4A017] mb-4">Reservations</p>
-            <h1 className="font-cormorant font-light text-white" style={{ fontSize: 'clamp(2.2rem, 5vw, 4rem)' }}>
-              Book Your Stay
-            </h1>
-          </div>
+      <div className="h-[48vh] min-h-[300px] relative overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: 'url("https://raw.githubusercontent.com/frabrice/EricApt/refs/heads/main/Apartments_1.JPG")' }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/45 to-black/70" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#B8860B] to-transparent opacity-50" />
+        <div className="relative h-full flex flex-col items-center justify-center text-center px-6">
+          <p className="section-label text-[#D4A017] mb-4">Reservations</p>
+          <h1 className="font-cormorant font-light text-white" style={{ fontSize: 'clamp(2.2rem, 5vw, 4rem)' }}>
+            Book Your Stay
+          </h1>
         </div>
       </div>
 

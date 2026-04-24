@@ -7,14 +7,20 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
+  const isHome = location.pathname === '/';
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener('scroll', handleScroll, { passive: true });
+    // Set initial state on mount
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close menu on route change
   useEffect(() => { setIsOpen(false); }, [location.pathname]);
+
+  // On non-home pages, always show solid white navbar
+  const transparent = isHome && !scrolled;
 
   const navItems = [
     { name: 'Home', path: '/' },
@@ -26,9 +32,9 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-500 ${
-        scrolled
-          ? 'bg-white/98 backdrop-blur-md shadow-[0_1px_0_rgba(184,134,11,0.15)]'
-          : 'bg-transparent'
+        transparent
+          ? 'bg-transparent'
+          : 'bg-white/98 backdrop-blur-md shadow-[0_1px_0_rgba(184,134,11,0.15)]'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
@@ -38,7 +44,7 @@ const Navbar = () => {
           <Link
             to="/"
             className="font-cormorant text-2xl tracking-[0.08em] transition-colors duration-300"
-            style={{ color: scrolled ? 'var(--gold)' : 'white' }}
+            style={{ color: transparent ? 'white' : 'var(--gold)' }}
           >
             Fairyscape
           </Link>
@@ -53,14 +59,14 @@ const Navbar = () => {
                   to={item.path}
                   className={`relative font-jost text-[0.78rem] tracking-[0.14em] uppercase font-light transition-colors duration-300 pb-0.5 ${
                     isActive
-                      ? scrolled ? 'text-[#B8860B]' : 'text-[#D4A017]'
-                      : scrolled ? 'text-gray-700 hover:text-[#B8860B]' : 'text-white/85 hover:text-white'
+                      ? transparent ? 'text-[#D4A017]' : 'text-[#B8860B]'
+                      : transparent ? 'text-white/85 hover:text-white' : 'text-gray-600 hover:text-[#B8860B]'
                   }`}
                 >
                   {item.name}
                   <span
                     className={`absolute -bottom-0.5 left-0 h-px bg-[#B8860B] transition-all duration-300 ${
-                      isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                      isActive ? 'w-full' : 'w-0'
                     }`}
                   />
                 </Link>
@@ -84,7 +90,7 @@ const Navbar = () => {
             </Link>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`transition-colors duration-300 ${scrolled ? 'text-gray-700' : 'text-white'}`}
+              className={`transition-colors duration-300 ${transparent ? 'text-white' : 'text-gray-700'}`}
               aria-label="Toggle menu"
             >
               {isOpen ? <X size={22} /> : <Menu size={22} />}
