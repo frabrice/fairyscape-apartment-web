@@ -11,7 +11,7 @@ const Footer = () => {
       <div className="h-px bg-gradient-to-r from-transparent via-[#B8860B] to-transparent opacity-40" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12 mb-12 sm:mb-16">
 
           {/* Brand */}
           <div className="lg:col-span-1">

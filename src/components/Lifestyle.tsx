@@ -63,13 +63,13 @@ const Lifestyle = () => {
         </div>
 
         {/* Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-[rgba(184,134,11,0.1)]">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[rgba(184,134,11,0.1)]">
           {amenities.map((amenity, index) => {
             const Icon = amenity.icon;
             return (
               <div key={index} className="group relative bg-white overflow-hidden">
                 {/* Image */}
-                <div className="relative h-[260px] overflow-hidden">
+                <div className="relative h-[200px] sm:h-[240px] lg:h-[260px] overflow-hidden">
                   <img
                     src={amenity.image}
                     alt={amenity.title}

@@ -40,12 +40,12 @@ const Gallery = () => {
         </div>
 
         {/* Grid — 3 large + 3 smaller */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3">
           {previewImages.map((image, index) => (
             <div
               key={index}
               className={`group relative overflow-hidden cursor-pointer ${index === 0 ? 'col-span-2 md:col-span-1 row-span-2' : ''}`}
-              style={{ aspectRatio: index === 0 ? 'auto' : '4/3', minHeight: index === 0 ? '360px' : undefined }}
+              style={{ aspectRatio: index === 0 ? 'auto' : '4/3', minHeight: index === 0 ? 'clamp(200px, 45vw, 360px)' : undefined }}
               onClick={() => window.scrollTo(0, 0)}
             >
               <Link to="/gallery" onClick={() => window.scrollTo(0, 0)}>

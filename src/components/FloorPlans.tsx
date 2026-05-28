@@ -149,11 +149,11 @@ const FloorPlans = () => {
         </div>
 
         {/* Cards grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
           {apartments[activeFloor].map((apt, idx) => (
             <div key={apt.id} className="luxury-card group overflow-hidden flex flex-col">
               {/* Image */}
-              <div className="relative h-44 overflow-hidden">
+              <div className="relative h-40 sm:h-44 overflow-hidden">
                 <img
                   src={apt.image}
                   alt={apt.name}
