@@ -171,7 +171,7 @@ const Hero = () => {
               <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
               <span className="font-jost text-[0.55rem] sm:text-[0.58rem] tracking-[0.2em] uppercase text-white/50">Available Now</span>
             </div>
-            <div className="font-cormorant text-base sm:text-lg font-light text-white mb-0.5">From 51,500 FRW</div>
+            <div className="font-cormorant text-base sm:text-lg font-light text-white mb-0.5">From 85,500 FRW</div>
             <div className="font-jost text-[0.6rem] sm:text-[0.62rem] text-white/35">per night · 88m² · 2 bed</div>
           </div>
 
